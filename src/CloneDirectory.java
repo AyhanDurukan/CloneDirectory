@@ -16,7 +16,7 @@ public class CloneDirectory {
         this.destinationPath = destinationPath;
         this.destinationDirectory = new File(destinationPath);
         System.out.println("Repertoire source : " + sourceDirectory);
-        System.out.println("Repertoire déstination : " + destinationDirectory);
+        System.out.println("Repertoire destination : " + destinationDirectory);
     }
 
     public List<String> listSourceDirectory(File sourceDirectory) throws IOException {
@@ -52,9 +52,9 @@ public class CloneDirectory {
         }
     }
 
-    public void printList() throws IOException {
+    public void printSourceFile() throws IOException {
         List<String> files = listSourceDirectory(getSourceDirectory());
-        System.out.println("Voici le contenu du repertoire " + sourceDirectory.getName());
+        System.out.println("Voici le contenu du repertoire " + sourceDirectory.getName() + ":");
         for (String file : files) {
             System.out.println(file);
         }
