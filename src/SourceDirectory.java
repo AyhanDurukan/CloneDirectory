@@ -23,15 +23,13 @@ public class SourceDirectory {
                 for (File file : directoryFiles) {
                     if (file.isFile()) {
                         files.add(file.getName());
-                        System.out.println(equals(path));
-                        System.out.println(path);
-                        System.out.println(file.getParent());
                         if (file.getParent().equals(path)) {
-                            System.out.println("On est la");
                             System.out.println(file.getName());
+                            files.add(file.getName());
                         }else {
                             File modifiedPaths = new File(file.getParent());
                             System.out.println(modifiedPaths.getName() + "/" + file.getName());
+                            files.add(modifiedPaths.getName() + "/" + file.getName());
                         }
                     } else if (file.isDirectory())
                         listDirectory(file);
