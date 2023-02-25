@@ -1,8 +1,10 @@
+import java.io.File;
 import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        SourceDirectory D = new SourceDirectory("C:/Users/ayhan/OneDrive/Documents/1er année ENSISA/Semestre 2/AOO Java/CloneDirectory/test","C:/Users/ayhan/OneDrive/Documents/1er année ENSISA/Semestre 2/AOO Java/CloneDirectory");
-        D.listDirectory(D.getDirectory());
+        CloneDirectory D = new CloneDirectory("C:\\Users\\ayhan\\OneDrive\\Documents\\1er année ENSISA\\Semestre 2\\AOO Java\\CloneDirectory\\testD","C:\\Users\\ayhan\\OneDrive\\Documents\\1er année ENSISA\\Semestre 2\\AOO Java\\CloneDirectory\\testDD");
+        System.out.println("\nVoici la liste : " + D.listSourceDirectory(D.getSourceDirectory()) + "\n");
+        D.printList();
     }
 }
