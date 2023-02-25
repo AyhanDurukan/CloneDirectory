@@ -10,13 +10,10 @@ public class CloneDirectory {
     private String destinationPath;
     private File destinationDirectory;
 
-    public CloneDirectory (String sourcePath, String destinationPath) {
+    public CloneDirectory (String sourcePath) {
         this.sourcePath = sourcePath;
         this.sourceDirectory = new File(sourcePath);
-        this.destinationPath = destinationPath;
-        this.destinationDirectory = new File(destinationPath);
-        System.out.println("Repertoire source : " + sourceDirectory);
-        System.out.println("Repertoire destination : " + destinationDirectory);
+        System.out.println("\nRepertoire source : " + sourceDirectory + "\n");
     }
 
     public List<String> listSourceDirectory(File sourceDirectory) throws IOException {
@@ -57,6 +54,45 @@ public class CloneDirectory {
         System.out.println("Voici le contenu du repertoire " + sourceDirectory.getName() + ":");
         for (String file : files) {
             System.out.println(file);
+        }
+    }
+
+    public void clone(String destinationPath) throws IOException {
+        this.destinationPath = destinationPath;
+        this.destinationDirectory = new File(destinationPath);
+        System.out.println("\nRepertoire destination : " + destinationDirectory + "\n");
+
+        List<String> files = listSourceDirectory(this.getSourceDirectory());
+        for (String file : files) {
+            System.out.println(file);
+            StringTokenizer modifiedPath = new StringTokenizer(file, "\\");
+            int count = modifiedPath.countTokens();
+            System.out.println(count);
+
+            String currentPath = destinationPath;
+            while (modifiedPath.hasMoreTokens()) {
+                String token = modifiedPath.nextToken();
+                count--;
+
+                if (count == 0) {
+                    String fileName = token;
+                    String filePath = currentPath + "\\" + fileName;
+                    File newFile = new File(filePath);
+                    if (newFile.createNewFile()) {
+                        System.out.println("Fichier " + fileName + " créé");
+                    } else {
+                        System.out.println("Impossible de créer le fichier " + fileName);
+                    }
+
+                } else {
+                    currentPath += "\\" + token;
+                    File currentDirectory = new File(currentPath);
+                    if (!currentDirectory.exists()) {
+                        currentDirectory.mkdir();
+                        System.out.println("Dossier " + token + " créé");
+                    }
+                }
+            }
         }
     }
 
