@@ -1,5 +1,6 @@
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -40,7 +41,8 @@ public class CloneDirectory {
                         }
                     }
                     if (!temp.isEmpty()) {
-                        files.add("testD\\" + String.join("\\", temp));
+                        String fileName = String.join("\\", temp);
+                        files.add(fileName);
                     }
                 } else if (file.isDirectory()) {
                     listSourceDirectoryRecursive(file, files);
@@ -83,6 +85,24 @@ public class CloneDirectory {
                     } else {
                         System.out.println("Impossible de créer le fichier " + fileName);
                     }
+
+                    String sourceFilePath = sourcePath + "\\" + file;
+                    FileInputStream fileInputStream = new FileInputStream(sourceFilePath);
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
+
+                    FileOutputStream fileOutputStream = new FileOutputStream(filePath);
+                    BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(fileOutputStream));
+
+                    String line;
+                    while ((line = bufferedReader.readLine()) != null) {
+                        bufferedWriter.write(line);
+                        bufferedWriter.newLine();
+                    }
+
+                    bufferedReader.close();
+                    bufferedWriter.close();
+                    fileInputStream.close();
+                    fileOutputStream.close();
 
                 } else {
                     currentPath += "\\" + token;
