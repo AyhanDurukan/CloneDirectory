@@ -5,11 +5,10 @@
 1. Lister le contenue d'un répertoire ("printSourceFile")+ fonction qui retourne sous forme d'une liste les chemain des fichier du 
    répertoire ("listSourceDirectory")
    => FINI
-
 2. Cloner les fichier en parcourant la liste retournée par la fonction "listSourceDirectory"
-   => Pas encore commencé
+   => FINI
 3. Lire le contenue des fichier puis les cloner
-   => Pas encore commencé 
+   => FINI
 
 ## **ETAPE 2 : Clonner sur un autre PC**
 
