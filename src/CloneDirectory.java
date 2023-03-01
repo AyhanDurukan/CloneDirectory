@@ -1,20 +1,21 @@
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-public class CloneDirectory {
+public class CloneDirectory implements Runnable {
     private String sourcePath;
     private File sourceDirectory;
     private String destinationPath;
     private File destinationDirectory;
 
-    public CloneDirectory (String sourcePath) {
+    public CloneDirectory (String sourcePath,String destinationPath) {
         this.sourcePath = sourcePath;
         this.sourceDirectory = new File(sourcePath);
         System.out.println("\nRepertoire source : " + sourceDirectory + "\n");
+        this.destinationPath = destinationPath;
+        this.destinationDirectory = new File(destinationPath);
+        System.out.println("\nRepertoire destination : " + destinationDirectory + "\n");
     }
 
     public List<String> listSourceDirectory(File sourceDirectory) throws IOException {
@@ -60,9 +61,6 @@ public class CloneDirectory {
     }
 
     public void clone(String destinationPath) throws IOException {
-        this.destinationPath = destinationPath;
-        this.destinationDirectory = new File(destinationPath);
-        System.out.println("\nRepertoire destination : " + destinationDirectory + "\n");
 
         List<String> files = listSourceDirectory(this.getSourceDirectory());
         for (String file : files) {
@@ -80,10 +78,28 @@ public class CloneDirectory {
                     String fileName = token;
                     String filePath = currentPath + "\\" + fileName;
                     File newFile = new File(filePath);
+
+                    if (newFile.exists()) {
+                        long sourceLastModified = new File(sourcePath + "\\" + file).lastModified();
+                        long destinationLastModified = newFile.lastModified();
+
+                        if (sourceLastModified > destinationLastModified) {
+                            if (newFile.delete()) {
+                                System.out.println("Fichier " + fileName + " supprimé");
+                            } else {
+                                System.out.println("Impossible de supprimer le fichier " + fileName);
+                                continue;
+                            }
+                        } else {
+                            continue;
+                        }
+                    }
+
                     if (newFile.createNewFile()) {
                         System.out.println("Fichier " + fileName + " créé");
                     } else {
                         System.out.println("Impossible de créer le fichier " + fileName);
+                        continue;
                     }
 
                     String sourceFilePath = sourcePath + "\\" + file;
@@ -112,6 +128,19 @@ public class CloneDirectory {
                         System.out.println("Dossier " + token + " créé");
                     }
                 }
+            }
+        }
+    }
+
+    public void run() {
+        while (true) {
+            try {
+                clone(destinationPath);
+                Thread.sleep(4000);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
         }
     }
