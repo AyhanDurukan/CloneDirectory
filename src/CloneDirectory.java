@@ -129,6 +129,32 @@ public class CloneDirectory implements Runnable {
                     }
                 }
             }
+        } removeDeletedFiles();
+    }
+
+    public void removeDeletedFiles() throws IOException {
+        List<String> sourceFiles = listSourceDirectory(getSourceDirectory());
+        List<String> destinationFiles = new ArrayList<>();
+
+        // list all files in the destination directory
+        File[] destinationFilesArray = destinationDirectory.listFiles();
+        if (destinationFilesArray != null) {
+            for (File file : destinationFilesArray) {
+                if (file.isFile()) {
+                    destinationFiles.add(file.getName());
+                }
+            }
+        }
+
+        for (String destinationFile : destinationFiles) {
+            if (!sourceFiles.contains(destinationFile)) {
+                File file = new File(destinationDirectory.getPath() + "\\" + destinationFile);
+                if (file.delete()) {
+                    System.out.println("Fichier " + destinationFile + " supprimé de la destination");
+                } else {
+                    System.out.println("Impossible de supprimer le fichier " + destinationFile + " de la destination");
+                }
+            }
         }
     }
 
