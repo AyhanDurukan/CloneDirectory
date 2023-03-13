@@ -7,8 +7,17 @@
     <list default="true" id="0fc7c46a-2607-4041-ab8b-1ed577728e44" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CloneDirectory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CloneDirectory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testD/fichier3 - Copie.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testDD/fichier3 - Copie.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testDD/dossier1/Dossier3/fichier10.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testDD/dossier1/Dossier3/fichier20.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testDD/dossier1/fichier10.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testDD/dossier1/fichier20.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testDD/dossier2/fichier100.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testDD/dossier2/fichier200.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testDD/fichier2 - Copie.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testDD/fichier2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testDD/fichier3.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testDD/fichier4.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +33,18 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="b598f35b-7429-4ab4-bbf1-7a99abc653de" />
+        <option name="url" value="https://github.com/AyhanDurukan/CloneDirectory.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -51,6 +72,20 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RunManager">
+    <configuration name="SourceDirectory" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="SourceDirectory" />
+      <module name="CloneDirectory" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.SourceDirectory" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -68,7 +103,14 @@
       <workItem from="1677488887445" duration="3243000" />
       <workItem from="1677662160597" duration="30000" />
       <workItem from="1677706408374" duration="5850000" />
-      <workItem from="1677934806258" duration="2528000" />
+      <workItem from="1677934806258" duration="3053000" />
+      <workItem from="1678283732915" duration="1186000" />
+      <workItem from="1678355240586" duration="606000" />
+      <workItem from="1678368329387" duration="4058000" />
+      <workItem from="1678540322965" duration="11564000" />
+      <workItem from="1678634089357" duration="8804000" />
+      <workItem from="1678689287396" duration="3779000" />
+      <workItem from="1678720698443" duration="434000" />
     </task>
     <servers />
   </component>
