@@ -6,18 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="0fc7c46a-2607-4041-ab8b-1ed577728e44" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CloneDirectory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CloneDirectory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testDD/dossier1/Dossier3/fichier10.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testDD/dossier1/Dossier3/fichier20.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testDD/dossier1/fichier10.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testDD/dossier1/fichier20.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testDD/dossier2/fichier100.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testDD/dossier2/fichier200.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testDD/fichier2 - Copie.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testDD/fichier2.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testDD/fichier3.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testDD/fichier4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DestinationDirectory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DestinationDirectory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SourceDirectory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SourceDirectory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testD/dossier2/fichier100.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testD/dossier2/fichier100.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testD/fichier2 - Copie.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +20,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -58,20 +51,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/ayhan/OneDrive/Documents/1er année ENSISA/Semestre 2/AOO Java/CloneDirectory&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/ayhan/OneDrive/Documents/1er année ENSISA/Semestre 2/AOO Java/CloneDirectory",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="SourceDirectory" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="SourceDirectory" />
@@ -110,7 +103,12 @@
       <workItem from="1678540322965" duration="11564000" />
       <workItem from="1678634089357" duration="8804000" />
       <workItem from="1678689287396" duration="3779000" />
-      <workItem from="1678720698443" duration="434000" />
+      <workItem from="1678720698443" duration="5176000" />
+      <workItem from="1678810713214" duration="2389000" />
+      <workItem from="1679090208175" duration="1850000" />
+      <workItem from="1679129907481" duration="603000" />
+      <workItem from="1679136253216" duration="18000" />
+      <workItem from="1679319037038" duration="2338000" />
     </task>
     <servers />
   </component>

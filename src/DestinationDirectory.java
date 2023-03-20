@@ -1,26 +1,29 @@
-import java.io.*;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.util.ArrayList;
-import java.util.LinkedList;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.rmi.Naming;
 import java.util.List;
 import java.util.StringTokenizer;
 
 public class DestinationDirectory {
     private String destinationPath;
     private File destinationDirectory;
-    private List<String> sFiles;
+    private List<String[]> sFiles; // Ajoutez cette ligne pour déclarer la variable d'instance sFiles
 
-    public DestinationDirectory (String destinationPath) {
+
+    public DestinationDirectory(String destinationPath) {
         this.destinationPath = destinationPath;
         this.destinationDirectory = new File(destinationPath);
         System.out.println("\nRepertoire destination : " + destinationDirectory + "\n");
     }
 
     public void cloneSource() throws IOException {
-        for (String file : sFiles) {
-            System.out.println(file);
-            StringTokenizer modifiedPath = new StringTokenizer(file, "\\");
+        for (String[] file : sFiles) {
+            String filePath = file[0];
+            String fileContent = file[1];
+
+            System.out.println(filePath);
+            StringTokenizer modifiedPath = new StringTokenizer(filePath, "\\");
             int count = modifiedPath.countTokens();
             System.out.println(count);
 
@@ -31,7 +34,7 @@ public class DestinationDirectory {
 
                 if (count == 0) {
                     String fileName = token;
-                    String filePath = currentPath + "\\" + fileName;
+                    filePath = currentPath + "\\" + fileName;
                     File newFile = new File(filePath);
 
                     if (newFile.createNewFile()) {
@@ -40,6 +43,10 @@ public class DestinationDirectory {
                         System.out.println("Impossible de créer le fichier " + fileName);
                         continue;
                     }
+
+                    FileWriter fileWriter = new FileWriter(newFile);
+                    fileWriter.write(fileContent);
+                    fileWriter.close();
 
                 } else {
                     currentPath += "\\" + token;
@@ -55,45 +62,22 @@ public class DestinationDirectory {
 
     public void printReceivedFile() throws IOException {
         System.out.println("Voici les fichiers recus :");
-        for (String file : sFiles) {
-            System.out.println(file);
+        for (String[] file : sFiles) {
+            System.out.println(file[0]);
         }
     }
 
-    public void receive (int port) throws IOException {
-        ServerSocket ss = new ServerSocket (port);
-        System.out.println("En attente de connexion d'un client...");
-        Socket server = ss.accept();
-        System.out.println("Connexion établie" + "\n");
-
-        BufferedWriter out = new BufferedWriter(new OutputStreamWriter(server.getOutputStream()));
-        BufferedReader in = new BufferedReader(new InputStreamReader(server.getInputStream()));
-
-        String line;
-        List<String> files = new ArrayList<>();
-
-        int numFiles = Integer.parseInt(in.readLine());
-
-        for (int i = 0; i < numFiles; i++) {
-            line = in.readLine();
-            StringTokenizer tokenizer = new StringTokenizer(line, ",");
-            while (tokenizer.hasMoreTokens()) {
-                String file = tokenizer.nextToken();
-                //System.out.println(file);
-                files.add(file);
-            }
-        }
+    public void receive() throws Exception {
+        DirectorySynchronizer synchronizer = (DirectorySynchronizer) Naming.lookup("rmi://localhost:1099/DirectorySynchronizer");
+        List<String[]> files = synchronizer.listSourceDirectory();
         System.out.println("La liste des fichiers recus :\n" + files + "\n");
+        // Mise à jour de la variable d'instance sFiles
         sFiles = files;
-        out.write("Les fichiers ont été reçus avec succès.");
-        out.newLine();
-        out.flush();
-        server.close();
     }
 
-    public static void main(String[] args) throws IOException {
-        DestinationDirectory DD = new DestinationDirectory("C:\\Users\\ayhan\\OneDrive\\Documents\\1er année ENSISA\\Semestre 2\\AOO Java\\CloneDirectory\\testDD");
-        DD.receive(8000);
-        DD.cloneSource();
+    public static void main(String[] args) throws Exception {
+        DestinationDirectory destinationDirectory = new DestinationDirectory("C:\\Users\\ayhan\\OneDrive\\Documents\\1er année ENSISA\\Semestre 2\\AOO Java\\CloneDirectory\\testDD");
+        destinationDirectory.receive();
+        destinationDirectory.cloneSource();
     }
 }
