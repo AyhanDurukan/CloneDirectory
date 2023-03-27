@@ -67,17 +67,98 @@ public class DestinationDirectory {
         }
     }
 
+    public void checkAndUpdate() throws Exception {
+        DirectorySynchronizer synchronizer = (DirectorySynchronizer) Naming.lookup("rmi://localhost:1099/DirectorySynchronizer");
+        List<String[]> newFiles = synchronizer.listSourceDirectory();
+        sFiles = newFiles;
+        cloneSource();
+        deleteFilesNotInSource();
+        updateModifiedFiles();
+    }
+
     public void receive() throws Exception {
         DirectorySynchronizer synchronizer = (DirectorySynchronizer) Naming.lookup("rmi://localhost:1099/DirectorySynchronizer");
         List<String[]> files = synchronizer.listSourceDirectory();
         System.out.println("La liste des fichiers recus :\n" + files + "\n");
-        // Mise à jour de la variable d'instance sFiles
         sFiles = files;
+    }
+
+    public void deleteFilesNotInSource() {
+        deleteFilesNotInSourceRecursive(destinationDirectory, sFiles);
+    }
+
+    private void deleteFilesNotInSourceRecursive(File directory, List<String[]> sourceFiles) {
+        File[] directoryFiles = directory.listFiles();
+        if (directoryFiles != null) {
+            for (File file : directoryFiles) {
+                if (file.isFile()) {
+                    boolean foundInSource = false;
+                    for (String[] sourceFile : sourceFiles) {
+                        String sourceFilePath = destinationPath + "\\" + sourceFile[0];
+                        if (sourceFilePath.equals(file.getPath())) {
+                            foundInSource = true;
+                            break;
+                        }
+                    }
+
+                    if (!foundInSource) {
+                        file.delete();
+                        System.out.println("Fichier supprimé: " + file.getPath());
+                    }
+                } else if (file.isDirectory()) {
+                    deleteFilesNotInSourceRecursive(file, sourceFiles);
+                }
+            }
+        }
+    }
+
+    public void updateModifiedFiles() throws IOException {
+        updateModifiedFilesRecursive(destinationDirectory, sFiles);
+    }
+
+    private void updateModifiedFilesRecursive(File directory, List<String[]> sourceFiles) throws IOException {
+        File[] directoryFiles = directory.listFiles();
+        if (directoryFiles != null) {
+            for (File file : directoryFiles) {
+                if (file.isFile()) {
+                    for (String[] sourceFile : sourceFiles) {
+                        String sourceFilePath = destinationPath + "\\" + sourceFile[0];
+                        if (sourceFilePath.equals(file.getPath())) {
+                            long sourceLastModified = Long.parseLong(sourceFile[2]);
+                            if (file.lastModified() < sourceLastModified) {
+                                FileWriter fileWriter = new FileWriter(file);
+                                fileWriter.write(sourceFile[1]);
+                                fileWriter.close();
+                                file.setLastModified(sourceLastModified);
+                                System.out.println("Fichier mis à jour : " + file.getPath());
+                            }
+                            break;
+                        }
+                    }
+                } else if (file.isDirectory()) {
+                    updateModifiedFilesRecursive(file, sourceFiles);
+                }
+            }
+        }
     }
 
     public static void main(String[] args) throws Exception {
         DestinationDirectory destinationDirectory = new DestinationDirectory("C:\\Users\\ayhan\\OneDrive\\Documents\\1er année ENSISA\\Semestre 2\\AOO Java\\CloneDirectory\\testDD");
         destinationDirectory.receive();
         destinationDirectory.cloneSource();
+
+        Thread updateThread = new Thread(() -> {
+            while (true) {
+                try {
+                    // Attendre 10 secondes avant de vérifier à nouveau
+                    Thread.sleep(10 * 1000);
+                    destinationDirectory.checkAndUpdate();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        updateThread.start();
     }
 }

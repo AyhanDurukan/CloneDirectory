@@ -26,10 +26,7 @@ public class SourceDirectory extends UnicastRemoteObject implements DirectorySyn
         return files;
     }
 
-    @Override
-    public void updateDestinationDirectory(List<String[]> files) throws RemoteException {
-
-    }
+    public void updateDestinationDirectory(List<String[]> files) throws RemoteException {}
 
     private void listSourceDirectoryRecursive(File directory, List<String[]> files) throws IOException {
         File[] directoryFiles = directory.listFiles();
@@ -52,7 +49,7 @@ public class SourceDirectory extends UnicastRemoteObject implements DirectorySyn
                         String fileName = String.join("\\", temp);
                         byte[] content = Files.readAllBytes(Paths.get(file.getPath()));
                         String contentString = new String(content, StandardCharsets.UTF_8);
-                        files.add(new String[]{fileName, contentString});
+                        files.add(new String[]{fileName, contentString, String.valueOf(file.lastModified())});
                     }
                 } else if (file.isDirectory()) {
                     listSourceDirectoryRecursive(file, files);
