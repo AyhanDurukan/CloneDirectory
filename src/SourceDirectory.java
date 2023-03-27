@@ -34,7 +34,7 @@ public class SourceDirectory extends UnicastRemoteObject implements DirectorySyn
             for (File file : directoryFiles) {
                 if (file.isFile()) {
                     List<String> temp = new ArrayList<>();
-                    StringTokenizer modifiedPath = new StringTokenizer(file.getPath(), "\\");
+                    StringTokenizer modifiedPath = new StringTokenizer(file.getPath(), File.separator);
                     boolean foundTestD = false;
                     while (modifiedPath.hasMoreTokens()) {
                         String val = modifiedPath.nextToken();
@@ -46,7 +46,7 @@ public class SourceDirectory extends UnicastRemoteObject implements DirectorySyn
                         }
                     }
                     if (!temp.isEmpty()) {
-                        String fileName = String.join("\\", temp);
+                        String fileName = String.join(File.separator, temp);
                         byte[] content = Files.readAllBytes(Paths.get(file.getPath()));
                         String contentString = new String(content, StandardCharsets.UTF_8);
                         files.add(new String[]{fileName, contentString, String.valueOf(file.lastModified())});

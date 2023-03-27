@@ -23,7 +23,7 @@ public class DestinationDirectory {
             String fileContent = file[1];
 
             System.out.println(filePath);
-            StringTokenizer modifiedPath = new StringTokenizer(filePath, "\\");
+            StringTokenizer modifiedPath = new StringTokenizer(filePath, File.separator);
             int count = modifiedPath.countTokens();
             System.out.println(count);
 
@@ -34,7 +34,7 @@ public class DestinationDirectory {
 
                 if (count == 0) {
                     String fileName = token;
-                    filePath = currentPath + "\\" + fileName;
+                    filePath = currentPath + File.separator + fileName;
                     File newFile = new File(filePath);
 
                     if (newFile.createNewFile()) {
@@ -49,7 +49,7 @@ public class DestinationDirectory {
                     fileWriter.close();
 
                 } else {
-                    currentPath += "\\" + token;
+                    currentPath += File.separator + token;
                     File currentDirectory = new File(currentPath);
                     if (!currentDirectory.exists()) {
                         currentDirectory.mkdir();
@@ -94,7 +94,7 @@ public class DestinationDirectory {
                 if (file.isFile()) {
                     boolean foundInSource = false;
                     for (String[] sourceFile : sourceFiles) {
-                        String sourceFilePath = destinationPath + "\\" + sourceFile[0];
+                        String sourceFilePath = destinationPath + File.separator + sourceFile[0];
                         if (sourceFilePath.equals(file.getPath())) {
                             foundInSource = true;
                             break;
@@ -122,7 +122,7 @@ public class DestinationDirectory {
             for (File file : directoryFiles) {
                 if (file.isFile()) {
                     for (String[] sourceFile : sourceFiles) {
-                        String sourceFilePath = destinationPath + "\\" + sourceFile[0];
+                        String sourceFilePath = destinationPath + File.separator + sourceFile[0];
                         if (sourceFilePath.equals(file.getPath())) {
                             long sourceLastModified = Long.parseLong(sourceFile[2]);
                             if (file.lastModified() < sourceLastModified) {

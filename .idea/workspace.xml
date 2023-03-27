@@ -6,12 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="0fc7c46a-2607-4041-ab8b-1ed577728e44" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DestinationDirectory.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/DestinationDirectory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DestinationDirectory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DestinationDirectory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SourceDirectory.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/SourceDirectory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SourceDirectory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SourceDirectory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testD/fichier4.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testD/fichier4.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testDD/fichier4.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testDD/fichier4.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,6 +58,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "inlay.hints",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -114,7 +109,7 @@
       <workItem from="1679390451411" duration="37000" />
       <workItem from="1679482596701" duration="4248000" />
       <workItem from="1679832118571" duration="700000" />
-      <workItem from="1679915005787" duration="2149000" />
+      <workItem from="1679915005787" duration="2935000" />
     </task>
     <servers />
   </component>
