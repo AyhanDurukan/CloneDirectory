@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
 public class DestinationDirectory {
     private String destinationPath;
     private File destinationDirectory;
-    private List<String[]> sFiles; // Ajoutez cette ligne pour déclarer la variable d'instance sFiles
+    private List<String[]> sFiles;
 
 
     public DestinationDirectory(String destinationPath) {

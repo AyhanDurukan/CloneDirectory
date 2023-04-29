@@ -5,7 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0fc7c46a-2607-4041-ab8b-1ed577728e44" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/BidirectionalSync.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DestinationDirectory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DestinationDirectory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DirectorySynchronizer.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/DirectorySynchronizer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DirectorySynchronizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DirectorySynchronizer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testD/FICHIER 5.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testD/dossier1/Dossier3/fichier10.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testD/dossier1/Dossier3/fichier20.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testD/dossier1/fichier10.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testD/dossier1/fichier20.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testD/dossier2/fichier100.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testD/dossier2/fichier200.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testD/fichier2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testD/fichier3.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testD/fichier4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testDD/fichier3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testDD/fichier3.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,8 +30,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -38,6 +53,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectId" id="2MCE9WjJOydQoSkF8WYAqKlcVvk" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -47,21 +65,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/ayhan/OneDrive/Documents/1er année ENSISA/Semestre 2/AOO Java/CloneDirectory",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "inlay.hints",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/ayhan/OneDrive/Documents/1er année ENSISA/Semestre 2/AOO Java/Learn/src/DirectorySynchronizer.java&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;inlay.hints&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="SourceDirectory" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="SourceDirectory" />
@@ -109,7 +127,30 @@
       <workItem from="1679390451411" duration="37000" />
       <workItem from="1679482596701" duration="4248000" />
       <workItem from="1679832118571" duration="700000" />
-      <workItem from="1679915005787" duration="2935000" />
+      <workItem from="1679915005787" duration="4630000" />
+      <workItem from="1679922333936" duration="657000" />
+      <workItem from="1679932720323" duration="5995000" />
+      <workItem from="1680004640396" duration="21000" />
+      <workItem from="1680349491056" duration="615000" />
+      <workItem from="1680522860421" duration="11075000" />
+      <workItem from="1680548098875" duration="4146000" />
+      <workItem from="1680599098284" duration="4549000" />
+      <workItem from="1680609258053" duration="18000" />
+      <workItem from="1680617214864" duration="1243000" />
+      <workItem from="1680703898933" duration="5844000" />
+      <workItem from="1680718025760" duration="17000" />
+      <workItem from="1680777104546" duration="1478000" />
+      <workItem from="1680783535754" duration="947000" />
+      <workItem from="1680953719552" duration="613000" />
+      <workItem from="1681051997597" duration="357000" />
+      <workItem from="1681144933654" duration="126000" />
+      <workItem from="1681214127254" duration="41000" />
+      <workItem from="1681319656500" duration="696000" />
+      <workItem from="1681996310060" duration="2301000" />
+      <workItem from="1682249647891" duration="1246000" />
+      <workItem from="1682618257128" duration="11884000" />
+      <workItem from="1682691194278" duration="14290000" />
+      <workItem from="1682762804214" duration="300000" />
     </task>
     <servers />
   </component>
