@@ -141,24 +141,4 @@ public class DestinationDirectory {
             }
         }
     }
-
-    public static void main(String[] args) throws Exception {
-        DestinationDirectory destinationDirectory = new DestinationDirectory("C:\\Users\\ayhan\\OneDrive\\Documents\\1er année ENSISA\\Semestre 2\\AOO Java\\CloneDirectory\\testDD");
-        destinationDirectory.receive();
-        destinationDirectory.cloneSource();
-
-        Thread updateThread = new Thread(() -> {
-            while (true) {
-                try {
-                    // Attendre 10 secondes avant de vérifier à nouveau
-                    Thread.sleep(10 * 1000);
-                    destinationDirectory.checkAndUpdate();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        updateThread.start();
-    }
 }
