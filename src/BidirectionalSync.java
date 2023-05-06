@@ -7,10 +7,10 @@ import java.nio.file.Files;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
-import java.util.*;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.*;
 import java.util.stream.Collectors;
 public class BidirectionalSync extends UnicastRemoteObject implements DirectorySynchronizer, RequestHandler, Runnable {
     private String sourcePath;
@@ -22,17 +22,17 @@ public class BidirectionalSync extends UnicastRemoteObject implements DirectoryS
     private boolean syncRequested;
     private boolean updateSource;
     private boolean isMyTurn;
-    private final int instanceId;
+    private int instanceId;
     private int turn = 1;
+    private String remoteIP;
+    private int localPort;
+    private int remotePort;
+    private volatile boolean isSyncRunning = true;
 
-
-    public BidirectionalSync(String sourcePath, long syncInterval, boolean updateSource, int instanceId) throws RemoteException {
-        this.sourcePath = sourcePath;
-        this.sourceDirectory = new File(sourcePath);
+    public BidirectionalSync(long syncInterval, boolean updateSource) throws RemoteException {
         this.syncInterval = syncInterval;
         this.syncRequested = false;
         this.syncAllowed = false;
-        this.instanceId = instanceId;
         this.updateSource = updateSource;
     }
     @Override
@@ -48,12 +48,33 @@ public class BidirectionalSync extends UnicastRemoteObject implements DirectoryS
         listSourceDirectoryRecursive(sourceDirectory, files);
         return files;
     }
+
+    public void stopSynchronization() throws RemoteException {
+        this.isSyncRunning = false;
+        try {
+            RequestHandler remoteRequestHandler = (RequestHandler) Naming.lookup("rmi://" + this.remoteIP + ":"+localPort+"/RequestHandler");
+            remoteRequestHandler.stopSync();
+        } catch (MalformedURLException | NotBoundException e) {
+            System.err.println("Erreur lors de l'arrêt de la synchronisation distante : " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void stopSync() {
+        this.isSyncRunning = false;
+    }
     @Override
     public boolean isReady() throws RemoteException {
         return true;
     }
+    public void setSourcePath (String sourcePath) {
+        this.sourcePath = sourcePath;
+        this.sourceDirectory = new File(sourcePath);
+        System.out.println("Source Path fixer: "+sourcePath);
+    }
     public void waitForRemote(String remoteIp) throws RemoteException, MalformedURLException, NotBoundException {
-        RequestHandler other = (RequestHandler) Naming.lookup("rmi://" + remoteIp + ":1099/RequestHandler");
+        RequestHandler other = (RequestHandler) Naming.lookup("rmi://" + remoteIp + ":"+localPort+"/RequestHandler");
 
         try {
             System.out.println("Attente de 10 secondes avant de vérifier si l'autre PC est prêt...");
@@ -132,7 +153,7 @@ public class BidirectionalSync extends UnicastRemoteObject implements DirectoryS
         }
     }
     public void synchronizeWith(String remoteIp, boolean updateSource) throws Exception {
-        DirectorySynchronizer other = (DirectorySynchronizer) Naming.lookup("rmi://" + remoteIp + ":1099/DirectorySynchronizer");
+        DirectorySynchronizer other = (DirectorySynchronizer) Naming.lookup("rmi://" + remoteIp + ":"+localPort+"/DirectorySynchronizer");
 
         List<String[]> remoteFiles = other.listDestinationDirectory();
         System.out.println("Nombre de fichiers distants : " + remoteFiles.size());
@@ -175,7 +196,7 @@ public class BidirectionalSync extends UnicastRemoteObject implements DirectoryS
 
     public void initializeSynchronization(String remoteIp) throws Exception {
         try {
-            DirectorySynchronizer other = (DirectorySynchronizer) Naming.lookup("rmi://" + remoteIp + ":1100/DirectorySynchronizer");
+            DirectorySynchronizer other = (DirectorySynchronizer) Naming.lookup("rmi://" + remoteIp + ":"+remotePort+"/DirectorySynchronizer");
 
 
         List<String[]> remoteFiles = other.listSourceDirectory();
@@ -253,17 +274,17 @@ public class BidirectionalSync extends UnicastRemoteObject implements DirectoryS
     @Override
     public void run() {
         try {
-            waitForRemote("127.0.0.1");
+            waitForRemote(remoteIP);
 
-            while (true) {
-
+            while (isSyncRunning) {
+                System.out.println(instanceId);
                 if (turn == instanceId) {
                     System.out.println("\nA votre tour !\n");
                     Thread.sleep(34000);
                     System.out.println("\nA C'est bientot fini ! !\n");
                     Thread.sleep(3000);
                     List<String[]> localFiles = listSourceDirectory();
-                    DirectorySynchronizer otherSynchronizer = (DirectorySynchronizer) Naming.lookup("rmi://127.0.0.1:1100/DirectorySynchronizer");
+                    DirectorySynchronizer otherSynchronizer = (DirectorySynchronizer) Naming.lookup("rmi://"+remoteIP+":"+remotePort+"/DirectorySynchronizer");
                     List<String[]> remoteFiles = otherSynchronizer.listDestinationDirectory();
 
                     if (!localFiles.equals(remoteFiles)) {
@@ -276,7 +297,7 @@ public class BidirectionalSync extends UnicastRemoteObject implements DirectoryS
 
                     Thread.sleep(1000);
 
-                    RequestHandler otherHandler = (RequestHandler) Naming.lookup("rmi://127.0.0.1:1100/RequestHandler");
+                    RequestHandler otherHandler = (RequestHandler) Naming.lookup("rmi://"+remoteIP+":"+remotePort+"/RequestHandler");
                     otherHandler.setRemoteTurn((turn == 1) ? 2 : 1);
                     turn = (turn == 1) ? 2 : 1;
                 } else {
@@ -290,9 +311,6 @@ public class BidirectionalSync extends UnicastRemoteObject implements DirectoryS
         }
     }
 
-    public void test () {
-        System.out.println("Samet");
-    }
     private Set<String> getDeletedFiles(List<String[]> localFiles, List<String[]> remoteFiles) {
         Set<String> localFilePaths = localFiles.stream().map(file -> file[0]).collect(Collectors.toSet());
         Set<String> remoteFilePaths = remoteFiles.stream().map(file -> file[0]).collect(Collectors.toSet());
@@ -375,25 +393,40 @@ public class BidirectionalSync extends UnicastRemoteObject implements DirectoryS
         deleteObsoleteFiles(sourceDirectory, updatedFilePaths);
     }
 
+    public void setLocalPort(int localPort) {
+        this.localPort = localPort;
+        if (localPort == 1099)
+            remotePort = 1100;
+        else remotePort = 1099;
+        System.out.println("Local port : " + localPort + "\nDestination port : " + remotePort);
+    }
+
+    public void setinstanceId(int instanceId) {
+        this.instanceId = instanceId;
+        System.out.println("Mon ID : " + instanceId);
+    }
 
     public void initialize (String destinationPathe) {
         this.destinationPath = destinationPathe;
         this.destinationDirectory = new File(destinationPath);
-        System.out.println("Destination de TESTD :" + destinationPathe);
     }
-    public static void main(String[] args) {
+
+    public void setRemoteIP(String remoteIP) {
+        this.remoteIP = remoteIP;
+        System.out.println("Adresse IP ok");
+    }
+
+    public void startSynchronization () {
         try {
-            Registry registry = LocateRegistry.createRegistry(1099);
+            Registry registry = LocateRegistry.createRegistry(localPort);
 
-            BidirectionalSync localDirectory = new BidirectionalSync("C:\\Users\\ayhan\\OneDrive\\Documents\\1er année ENSISA\\Semestre 2\\AOO Java\\CloneDirectory\\testD", 40000, true, 1); // 60000ms = 1 minute
-
-            Naming.rebind("rmi://localhost:1099/DirectorySynchronizer", localDirectory);
-            Naming.rebind("rmi://localhost:1099/RequestHandler", localDirectory);
+            Naming.rebind("rmi://"+ this.remoteIP+":"+localPort+"/DirectorySynchronizer", this);
+            Naming.rebind("rmi://"+ this.remoteIP+":"+localPort+"/RequestHandler", this);
 
             try {
                 Thread.sleep(10000);
-                DirectorySynchronizer destDirectory = (DirectorySynchronizer) Naming.lookup("rmi://127.0.0.1:1100/DirectorySynchronizer");
-                destDirectory.initialize("C:\\Users\\ayhan\\OneDrive\\Documents\\1er année ENSISA\\Semestre 2\\AOO Java\\CloneDirectory\\testD");
+                DirectorySynchronizer destDirectory = (DirectorySynchronizer) Naming.lookup("rmi://"+ this.remoteIP +":"+remotePort+"/DirectorySynchronizer");
+                destDirectory.initialize(this.sourcePath);
             } catch (MalformedURLException | RemoteException | NotBoundException e) {
                 System.err.println("ERREUR DANS LA DESTINATION PUT : " + e.getMessage());
                 e.printStackTrace();
@@ -401,16 +434,16 @@ public class BidirectionalSync extends UnicastRemoteObject implements DirectoryS
 
             System.out.println("Serveur RMI lancé");
 
-            localDirectory.waitForRemote("127.0.0.1");
-            localDirectory.initializeSynchronization("127.0.0.1");
+            this.waitForRemote(this.remoteIP);
+            this.initializeSynchronization(this.remoteIP);
 
-            localDirectory.setSyncAllowed(true);
+            this.setSyncAllowed(true);
 
-            Thread syncThread = new Thread(localDirectory);
+            Thread syncThread = new Thread(this);
             syncThread.start();
 
             try {
-                RequestHandler other = (RequestHandler) Naming.lookup("rmi://127.0.0.1:1099/RequestHandler");
+                RequestHandler other = (RequestHandler) Naming.lookup("rmi://"+ this.remoteIP+":"+localPort+"/RequestHandler");
                 boolean syncAllowed = other.acceptSyncRequest(); // Déclarez 'syncAllowed' ici
                 if (!syncAllowed) {
                     System.out.println("La synchronisation a été refusée par l'autre PC.");

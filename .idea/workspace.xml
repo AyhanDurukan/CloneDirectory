@@ -1,20 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="CloneDirectory:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0fc7c46a-2607-4041-ab8b-1ed577728e44" name="Changes" comment="" />
+    <list default="true" id="0fc7c46a-2607-4041-ab8b-1ed577728e44" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CloneDirectory.iml" beforeDir="false" afterPath="$PROJECT_DIR$/CloneDirectory.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BidirectionalSync.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/BidirectionalSync.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BidirectionalSync.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BidirectionalSync.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DirectorySynchronizer.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/DirectorySynchronizer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Graphic.form" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Graphic.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RequestHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/RequestHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RequestHandler.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -53,22 +71,27 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/ayhan/OneDrive/Documents/1er année ENSISA/Semestre 2/AOO Java/CloneDirectory&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/ayhan/OneDrive/Documents/1er année ENSISA/Semestre 2/AOO Java/Learn/src/MainFrame.java&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;inlay.hints&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.import&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="" />
+    </key>
+  </component>
   <component name="RunManager">
-    <configuration name="SourceDirectory" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="SourceDirectory" />
+    <configuration name="MainFrame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MainFrame" />
       <module name="CloneDirectory" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -76,7 +99,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.SourceDirectory" />
+        <item itemvalue="Application.MainFrame" />
       </list>
     </recent_temporary>
   </component>
@@ -147,7 +170,10 @@
       <workItem from="1683224189494" duration="10993000" />
       <workItem from="1683307792389" duration="13766000" />
       <workItem from="1683325931966" duration="99000" />
-      <workItem from="1683367250045" duration="1338000" />
+      <workItem from="1683367250045" duration="2216000" />
+      <workItem from="1683371271884" duration="18578000" />
+      <workItem from="1683393370052" duration="8727000" />
+      <workItem from="1683403216408" duration="4369000" />
     </task>
     <servers />
   </component>
