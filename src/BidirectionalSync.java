@@ -26,18 +26,14 @@ public class BidirectionalSync extends UnicastRemoteObject implements DirectoryS
     private int turn = 1;
 
 
-    public BidirectionalSync(String sourcePath, String destinationPath, long syncInterval, boolean updateSource, int instanceId) throws RemoteException {
+    public BidirectionalSync(String sourcePath, long syncInterval, boolean updateSource, int instanceId) throws RemoteException {
         this.sourcePath = sourcePath;
-        this.destinationPath = destinationPath;
         this.sourceDirectory = new File(sourcePath);
-        this.destinationDirectory = new File(destinationPath);
         this.syncInterval = syncInterval;
         this.syncRequested = false;
         this.syncAllowed = false;
         this.instanceId = instanceId;
         this.updateSource = updateSource;
-        System.out.println("\nRépertoire source : " + sourceDirectory + "\n");
-        System.out.println("\nRépertoire destination : " + destinationDirectory + "\n");
     }
     @Override
     public boolean requestSyncPermission() throws RemoteException {
@@ -87,22 +83,28 @@ public class BidirectionalSync extends UnicastRemoteObject implements DirectoryS
             File localFile = new File(destinationDirectory, filePath);
 
             if (!localFile.exists() || localFile.lastModified() < remoteTimestamp) {
-                localFile.getParentFile().mkdirs();
-                try (FileWriter fileWriter = new FileWriter(localFile)) {
-                    fileWriter.write(fileContent);
+                if (fileContent.isEmpty()) {
+                    localFile.mkdirs();
+                } else {
+                    localFile.getParentFile().mkdirs();
+                    try (FileWriter fileWriter = new FileWriter(localFile)) {
+                        fileWriter.write(fileContent);
+                    }
                 }
                 localFile.setLastModified(remoteTimestamp);
-                System.out.println("Fichier créé/mis à jour : " + localFile.getAbsolutePath() + " | Créé avec succès : " + localFile.exists());
+                System.out.println("Fichier/dossier créé/mis à jour : " + localFile.getAbsolutePath() + " | Créé avec succès : " + localFile.exists());
 
-                // Ajoutez cette ligne pour introduire une pause après la création ou la mise à jour d'un fichier.
                 try {
                     Thread.sleep(500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-            }updatedFilePaths.add(filePath);
-        }deleteObsoleteFiles(destinationDirectory, updatedFilePaths);
+            }
+            updatedFilePaths.add(filePath);
+        }
+        deleteObsoleteFiles(destinationDirectory, updatedFilePaths);
     }
+
     @Override
     public List<String[]> listDestinationDirectory() throws IOException {
         List<String[]> files = new ArrayList<>();
@@ -113,14 +115,17 @@ public class BidirectionalSync extends UnicastRemoteObject implements DirectoryS
         File[] directoryFiles = directory.listFiles();
         if (directoryFiles != null) {
             for (File file : directoryFiles) {
+                String relativePath = destinationDirectory.toURI().relativize(file.toURI()).getPath();
+                long timestamp = file.lastModified();
+
                 if (file.isFile()) {
-                    String relativePath = destinationDirectory.toURI().relativize(file.toURI()).getPath();
                     byte[] content = Files.readAllBytes(file.toPath());
                     String contentString = new String(content, StandardCharsets.UTF_8);
-                    long timestamp = file.lastModified();
                     System.out.println("Fichier destination : " + relativePath);
                     files.add(new String[]{relativePath, contentString, String.valueOf(timestamp)});
                 } else if (file.isDirectory()) {
+                    System.out.println("Dossier destination : " + relativePath);
+                    files.add(new String[]{relativePath, "", String.valueOf(timestamp)});
                     listDestinationDirectoryRecursive(file, files);
                 }
             }
@@ -146,14 +151,17 @@ public class BidirectionalSync extends UnicastRemoteObject implements DirectoryS
             File localFile = new File(destinationDirectory, filePath);
 
             if (!localFile.exists() || localFile.lastModified() < remoteTimestamp) {
-                localFile.getParentFile().mkdirs();
-                try (FileWriter fileWriter = new FileWriter(localFile)) {
-                    fileWriter.write(fileContent);
+                if (fileContent.isEmpty()) {
+                    localFile.mkdirs();
+                } else {
+                    localFile.getParentFile().mkdirs();
+                    try (FileWriter fileWriter = new FileWriter(localFile)) {
+                        fileWriter.write(fileContent);
+                    }
                 }
                 localFile.setLastModified(remoteTimestamp);
-                System.out.println("Fichier créé/mis à jour : " + localFile.getAbsolutePath() + " | Créé avec succès : " + localFile.exists());
+                System.out.println("Fichier/dossier créé/mis à jour : " + localFile.getAbsolutePath() + " | Créé avec succès : " + localFile.exists());
 
-                // Ajoutez cette ligne pour introduire une pause après la création ou la mise à jour d'un fichier.
                 try {
                     Thread.sleep(500);
                 } catch (InterruptedException e) {
@@ -163,7 +171,50 @@ public class BidirectionalSync extends UnicastRemoteObject implements DirectoryS
             updatedFilePaths.add(filePath);
         }
         removeFiles(getDeletedFiles(listSourceDirectory(), remoteFiles));
-    }@Override
+    }
+
+    public void initializeSynchronization(String remoteIp) throws Exception {
+        try {
+            DirectorySynchronizer other = (DirectorySynchronizer) Naming.lookup("rmi://" + remoteIp + ":1100/DirectorySynchronizer");
+
+
+        List<String[]> remoteFiles = other.listSourceDirectory();
+            System.out.println("Contenu de remoteFiles :");
+            for (String[] remoteFile : remoteFiles) {
+                System.out.println(Arrays.toString(remoteFile));
+            }
+        List<String[]> localFiles = listSourceDirectory();
+
+        // Ajouter les fichiers distants manquants au répertoire source
+        for (String[] remoteFile : remoteFiles) {
+            boolean fileExists = localFiles.stream().anyMatch(localFile -> localFile[0].equals(remoteFile[0]));
+            if (!fileExists) {
+                String filePath = remoteFile[0];
+                String fileContent = remoteFile[1];
+                long remoteTimestamp = Long.parseLong(remoteFile[2]);
+
+                File localFile = new File(sourceDirectory, filePath);
+
+                if (fileContent.isEmpty()) {
+                    localFile.mkdirs();
+                } else {
+                    localFile.getParentFile().mkdirs();
+                    try (FileWriter fileWriter = new FileWriter(localFile)) {
+                        fileWriter.write(fileContent);
+                    }
+                }
+                localFile.setLastModified(remoteTimestamp);
+                System.out.println("Fichier/dossier ajouté : " + localFile.getAbsolutePath() + " | Créé avec succès : " + localFile.exists());
+            }
+        }
+        }catch (MalformedURLException | RemoteException | NotBoundException e) {
+            System.err.println("ERREUR dans le synchdeb : " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+
+    @Override
     public boolean acceptSyncRequest() throws RemoteException {
         System.out.println("Voulez-vous accepter la demande de synchronisation ? (y/n)");
         Scanner scanner = new Scanner(System.in);
@@ -176,19 +227,23 @@ public class BidirectionalSync extends UnicastRemoteObject implements DirectoryS
         File[] directoryFiles = directory.listFiles();
         if (directoryFiles != null) {
             for (File file : directoryFiles) {
+                String relativePath = sourceDirectory.toURI().relativize(file.toURI()).getPath();
+                long timestamp = file.lastModified();
+
                 if (file.isFile()) {
-                    String relativePath = sourceDirectory.toURI().relativize(file.toURI()).getPath();
                     byte[] content = Files.readAllBytes(file.toPath());
                     String contentString = new String(content, StandardCharsets.UTF_8);
-                    long timestamp = file.lastModified();
                     System.out.println("Fichier source : " + relativePath);
                     files.add(new String[]{relativePath, contentString, String.valueOf(timestamp)});
                 } else if (file.isDirectory()) {
+                    System.out.println("Dossier source : " + relativePath);
+                    files.add(new String[]{relativePath, "", String.valueOf(timestamp)});
                     listSourceDirectoryRecursive(file, files);
                 }
             }
         }
     }
+
 
     @Override
     public void setRemoteTurn(int turn) throws RemoteException {
@@ -298,31 +353,57 @@ public class BidirectionalSync extends UnicastRemoteObject implements DirectoryS
             File localFile = new File(destinationDirectory, filePath);
 
             if (!localFile.exists() || localFile.lastModified() < remoteTimestamp) {
-                localFile.getParentFile().mkdirs();
-                try (FileWriter fileWriter = new FileWriter(localFile)) {
-                    fileWriter.write(fileContent);
+                if (fileContent.isEmpty()) {
+                    localFile.mkdirs();
+                } else {
+                    localFile.getParentFile().mkdirs();
+                    try (FileWriter fileWriter = new FileWriter(localFile)) {
+                        fileWriter.write(fileContent);
+                    }
                 }
                 localFile.setLastModified(remoteTimestamp);
-                System.out.println("Fichier créé/mis à jour : " + localFile.getAbsolutePath() + " | Créé avec succès : " + localFile.exists());
+                System.out.println("Fichier/dossier créé/mis à jour : " + localFile.getAbsolutePath() + " | Créé avec succès : " + localFile.exists());
 
                 try {
                     Thread.sleep(500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-            }updatedFilePaths.add(filePath);
-        }deleteObsoleteFiles(sourceDirectory, updatedFilePaths);
+            }
+            updatedFilePaths.add(filePath);
+        }
+        deleteObsoleteFiles(sourceDirectory, updatedFilePaths);
+    }
+
+
+    public void initialize (String destinationPathe) {
+        this.destinationPath = destinationPathe;
+        this.destinationDirectory = new File(destinationPath);
+        System.out.println("Destination de TESTD :" + destinationPathe);
     }
     public static void main(String[] args) {
         try {
             Registry registry = LocateRegistry.createRegistry(1099);
 
-            BidirectionalSync localDirectory = new BidirectionalSync("C:\\Users\\ayhan\\OneDrive\\Documents\\1er année ENSISA\\Semestre 2\\AOO Java\\CloneDirectory\\testD", "C:\\Users\\ayhan\\OneDrive\\Documents\\1er année ENSISA\\Semestre 2\\AOO Java\\Learn\\testDB", 40000, true, 1); // 60000ms = 1 minute
+            BidirectionalSync localDirectory = new BidirectionalSync("C:\\Users\\ayhan\\OneDrive\\Documents\\1er année ENSISA\\Semestre 2\\AOO Java\\CloneDirectory\\testD", 40000, true, 1); // 60000ms = 1 minute
+
             Naming.rebind("rmi://localhost:1099/DirectorySynchronizer", localDirectory);
             Naming.rebind("rmi://localhost:1099/RequestHandler", localDirectory);
+
+            try {
+                Thread.sleep(10000);
+                DirectorySynchronizer destDirectory = (DirectorySynchronizer) Naming.lookup("rmi://127.0.0.1:1100/DirectorySynchronizer");
+                destDirectory.initialize("C:\\Users\\ayhan\\OneDrive\\Documents\\1er année ENSISA\\Semestre 2\\AOO Java\\CloneDirectory\\testD");
+            } catch (MalformedURLException | RemoteException | NotBoundException e) {
+                System.err.println("ERREUR DANS LA DESTINATION PUT : " + e.getMessage());
+                e.printStackTrace();
+            }
+
             System.out.println("Serveur RMI lancé");
 
             localDirectory.waitForRemote("127.0.0.1");
+            localDirectory.initializeSynchronization("127.0.0.1");
+
             localDirectory.setSyncAllowed(true);
 
             Thread syncThread = new Thread(localDirectory);

@@ -8,27 +8,11 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BidirectionalSync.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/BidirectionalSync.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BidirectionalSync.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BidirectionalSync.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DestinationDirectory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DestinationDirectory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DirectorySynchronizer.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/DirectorySynchronizer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DirectorySynchronizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DirectorySynchronizer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RequestHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/RequestHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RequestHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testD/1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testD/1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testD/2222.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testD/Le/Le.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testD/Test1.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testD/Test2.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testDD/FICHIER 5.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testDD/dossier1/Dossier3/fichier10.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testDD/dossier1/Dossier3/fichier20.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testDD/dossier1/fichier10.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testDD/dossier1/fichier20.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testDD/dossier2/fichier100.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testDD/dossier2/fichier200.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testDD/fichier2.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testDD/fichier3.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testDD/fichier4 - Copie.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testDD/fichier4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testD/1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testD/Fichier1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testD/TEST.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,7 +154,9 @@
       <workItem from="1683190376558" duration="1855000" />
       <workItem from="1683217313467" duration="5000" />
       <workItem from="1683224189494" duration="10993000" />
-      <workItem from="1683307792389" duration="5953000" />
+      <workItem from="1683307792389" duration="13766000" />
+      <workItem from="1683325931966" duration="99000" />
+      <workItem from="1683367250045" duration="800000" />
     </task>
     <servers />
   </component>
