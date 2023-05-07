@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="CloneDirectory:jar" />
+      <artifact name="CloneDirectory:jar4" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
@@ -10,15 +10,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0fc7c46a-2607-4041-ab8b-1ed577728e44" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/interfaces/RequestHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CloneDirectory.iml" beforeDir="false" afterPath="$PROJECT_DIR$/CloneDirectory.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BidirectionalSync.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/BidirectionalSync.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BidirectionalSync.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BidirectionalSync.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DirectorySynchronizer.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/DirectorySynchronizer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphic.form" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graphic.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RequestHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/RequestHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RequestHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BidirectionalSync.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BidirectionalSync.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/synchronization/BidirectionalSync.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DirectorySynchronizer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DirectorySynchronizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/DirectorySynchronizer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MFrame$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MFrame.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MainFrame$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MainFrame$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MainFrame$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MainFrame$4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MainFrame$5.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MainFrame$6.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MainFrame$7.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MainFrame$8.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MainFrame.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/MainFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RequestHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RequestHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TurnChangeListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testD/1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testD/2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testD/3.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testDD/1 - Copie.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testDD/1.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,8 +50,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -66,24 +85,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/ayhan/OneDrive/Documents/1er année ENSISA/Semestre 2/AOO Java/Learn/src/MainFrame.java&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.import&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/ayhan/OneDrive/Documents/1er année ENSISA/Semestre 2/AOO Java/Learn/src/MainFrame.java",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="" />
@@ -91,7 +110,7 @@
   </component>
   <component name="RunManager">
     <configuration name="MainFrame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="MainFrame" />
+      <option name="MAIN_CLASS_NAME" value="gui.MainFrame" />
       <module name="CloneDirectory" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -173,7 +192,11 @@
       <workItem from="1683367250045" duration="2216000" />
       <workItem from="1683371271884" duration="18578000" />
       <workItem from="1683393370052" duration="8727000" />
-      <workItem from="1683403216408" duration="4369000" />
+      <workItem from="1683403216408" duration="9878000" />
+      <workItem from="1683430021694" duration="18875000" />
+      <workItem from="1683461790553" duration="68000" />
+      <workItem from="1683470362362" duration="17000" />
+      <workItem from="1683472057745" duration="417000" />
     </task>
     <servers />
   </component>

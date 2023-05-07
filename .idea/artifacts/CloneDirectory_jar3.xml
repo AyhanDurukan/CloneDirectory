@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="CloneDirectory:jar3">
+    <output-path>$PROJECT_DIR$/out/artifacts/CloneDirectory_jar3</output-path>
+    <root id="archive" name="CloneDirectory.jar">
+      <element id="module-output" name="CloneDirectory" />
+    </root>
+  </artifact>
+</component>
